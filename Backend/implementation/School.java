@@ -10,7 +10,7 @@ public class School {
 	private String Name;
 	List <Assistant> assistant = new ArrayList <Assistant> () ;
 	private String Address;
-	List <Group> group = new ArrayList<Group>();
+	List <Group> groups = new ArrayList<Group>();
 	
 	
 	public School(String iD, String name, String address) {
@@ -41,10 +41,7 @@ public class School {
 
 	
     public void removeAssistant (Assistant assistantID) {
-      if( assistant.contains( assistantID)) {
-    	  assistant.remove(assistant);
-      }
-      else System.out.println("This assistant doesnt exist");
+     assistant.removeIf(assistant -> assistant.getAssistantID().equals(assistantID));
        
     }
     
@@ -58,10 +55,7 @@ public class School {
     }
     
     public void removeGroup (Group groupID) {
-        if( group.contains( groupID)) {
-      	  group.remove(group);
-        }
-        else System.out.println("This group doesnt exist");
+        groups.removeIf(groups -> groups.getGroupID().equals(groupID));
          
       }
     
