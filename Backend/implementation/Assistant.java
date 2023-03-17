@@ -59,4 +59,7 @@ public class Assistant {
     return getFatherPhoneNo ();	
     return getMotherPhoneNo();
     }
+	public Group viewGroup(){
+		return group;
+	}
 }
