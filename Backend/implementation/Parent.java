@@ -2,7 +2,7 @@ package implementation;
 
 public interface Parent {
 
-	public void editMedicalHistory();
-	public void editAdvice();
+	 void editMedicalHistory(String context, String StudentID);
+	 void editAdvice(String advice, String StudentID);
 	
 }
