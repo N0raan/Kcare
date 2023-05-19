@@ -1,0 +1,74 @@
+USE KCare;
+
+CREATE TABLE Assistant (
+Assistant_Id VARCHAR(5) NOT NULL,
+First_name VARCHAR(50) NULL,
+Last_name VARCHAR(50) NULL,
+Age INT NULL,
+PRIMARY KEY (Assistant_Id)
+);
+
+CREATE TABLE Class (
+Class_Id VARCHAR(5) NOT NULL,
+Number_of_Students INT NULL,
+Assistant_Id VARCHAR(5) NULL,
+Student_Id VARCHAR(5) NULL,
+PRIMARY KEY (Class_Id),
+FOREIGN KEY (Assistant_Id) REFERENCES Assistant (Assistant_Id),
+FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id)
+);
+
+CREATE TABLE Parent (
+ParentName VARCHAR(50) NULL,
+Phone_number VARCHAR(11) NOT NULL,
+PRIMARY KEY (Phone_number)
+);
+
+CREATE TABLE School (
+School_Id VARCHAR(5) NOT NULL,
+School_name VARCHAR(20) NULL,
+school_address VARCHAR(50) NULL,
+PRIMARY KEY (School_Id)
+);
+
+CREATE TABLE Student (
+Student_Id VARCHAR(5) NOT NULL,
+First_Name VARCHAR(50) NULL,
+Last_Name VARCHAR(50) NULL,
+School_Id VARCHAR(5) NULL,
+Phone_number VARCHAR(11) NULL,
+PRIMARY KEY (Student_Id),
+FOREIGN KEY (School_Id) REFERENCES School (School_Id),
+FOREIGN KEY (Phone_number) REFERENCES Parent (Phone_number)
+);
+
+ALTER TABLE Class ADD FOREIGN KEY (Assistant_Id)REFERENCES Assistant (Assistant_Id);
+
+ALTER TABLE Class ADD FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id);
+
+ALTER TABLE Student ADD FOREIGN KEY (School_Id) REFERENCES School (School_Id);
+
+ALTER TABLE Student ADD FOREIGN KEY (Phone_number) REFERENCES Parent (Phone_number);
+
+alter table class add column School_Id varchar (5);
+ALTER TABLE class ADD foreign key (School_Id) REFERENCES school (School_Id);
+
+alter table assistant add column School_Id varchar(5);
+ALTER TABLE assistant ADD foreign key (School_Id) REFERENCES school (School_Id);
+
+alter table assistant add column Class_Id varchar(5);
+ALTER TABLE assistant ADD foreign key (Class_Id) REFERENCES class (Class_Id);
+
+alter table parent add column Student_Id varchar (5);
+alter table parent add foreign key (Student_Id) references student (Student_Id);
+
+
+alter table student add column Class_Id varchar (5);
+alter table student add foreign key (Class_Id) references class (Class_Id);
+
+alter table student add column Assistant_Id varchar (5);
+alter table student add foreign key (Assistant_Id) references assistant (Assistant_Id);
+
+alter table student add column PhysicalHistory varchar (255);
+alter table student add column MentalHistory varchar (255);
+
