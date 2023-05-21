@@ -16,11 +16,12 @@
       <button type="submit">Login</button>
       <div class="error-msg"></div>
     </form-->
-    <form action="StudentServlet" method="get">
-      <label for="studentId">Enter Student Id:</label>
-      <input type="text" id="studentId" name="Student_Id">
+   <form action="LoginServlet" method="get">
+      <h2>Login</h2>
+      <label for="studentId">Please Enter Student Code:</label>
+      <input type="text" id="studentId" placeholder="Student Code" name="Student_Id" required>
       <br><br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Login">
     </form>
   </div>
   <script src="script.js"></script>
