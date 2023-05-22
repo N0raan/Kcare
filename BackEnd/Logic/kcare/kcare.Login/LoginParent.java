@@ -19,7 +19,7 @@ public class LoginParent {
 	MySqlConnection dbconnection;
 
 	
-	
+	// LoginDao
 public boolean CheckLogin (String S_ID) {
 		
 		kcare_login log = new kcare_login(S_ID); 
@@ -47,3 +47,61 @@ public boolean CheckLogin (String S_ID) {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	
+	
+	public LoginParent(Student student) {
+		super();
+		this.student = student;
+	}
+
+
+
+
+
+	public boolean authenticate () {
+		
+		
+		Connection conn=MySqlConnection.getConnection();
+		MySqlConnection.
+		
+		try {
+            // Prepare the SQL statement
+            String sql = "SELECT name FROM students WHERE Student_Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, student.getStudent_Id());
+
+            // Execute the query
+            ResultSet result = statement.executeQuery();
+
+            // Retrieve the student name from the query result
+            if (result.next()) {
+                String First_Name = result.getString("name");
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error retrieving student name: " + ex.getMessage());
+            
+        }
+		return false;
+		
+		
+	}
+	
+	*/
+	
+	
+	
+	
+
+}
