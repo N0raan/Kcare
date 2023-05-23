@@ -1,0 +1,41 @@
+package ParentConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import kcare.Object.*;
+import kcare.sqlConnection.*;
+public class MedicalHistoryJDBC {
+	
+public void getStudentMedicalHistory (String Student_Id) {
+	    
+	    Student student = new Student (Student_Id);
+
+	    try {
+	      MySqlConnection dbConnection = MySqlConnection.getInstance();
+	      Connection connection = dbConnection.getConnection();
+	      PreparedStatement ps = connection.prepareStatement("SELECT PhysicalHistory, MentalHistory FROM student WHERE Student_Id=?");
+	      ps.setString(1,student.getStudent_Id());
+	      
+	      ResultSet rs = ps.executeQuery();
+
+	      while(rs.next()){
+	                
+	                student.setPhysicalHistory(rs.getString("PhysicalHistory"));;
+	    	       
+	                student.setMentalHistory(rs.getString("MentalHistory"));
+	               
+	                
+	                System.out.print("Physical History: "  + student.getPhysicalHistory());
+	                System.out.print("Mental History:  " + student.getMentalHistory());
+	              
+	            } 
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    //return student;
+	    
+	  }
+
+}
