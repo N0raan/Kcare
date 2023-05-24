@@ -1,3 +1,4 @@
+create database KCare;
 USE KCare;
 
 CREATE TABLE Assistant (
@@ -8,28 +9,18 @@ Age INT NULL,
 PRIMARY KEY (Assistant_Id)
 );
 
-CREATE TABLE Class (
-Class_Id VARCHAR(5) NOT NULL,
-Number_of_Students INT NULL,
-Assistant_Id VARCHAR(5) NULL,
-Student_Id VARCHAR(5) NULL,
-PRIMARY KEY (Class_Id),
-FOREIGN KEY (Assistant_Id) REFERENCES Assistant (Assistant_Id),
-FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id)
-);
-
-CREATE TABLE Parent (
-ParentName VARCHAR(50) NULL,
-Phone_number VARCHAR(11) NOT NULL,
-PRIMARY KEY (Phone_number)
-);
-
 CREATE TABLE School (
 School_Id VARCHAR(5) NOT NULL,
 School_name VARCHAR(20) NULL,
 school_address VARCHAR(50) NULL,
 PRIMARY KEY (School_Id)
 );
+CREATE TABLE Parent (
+ParentName VARCHAR(50) NULL,
+Phone_number VARCHAR(11) NOT NULL,
+PRIMARY KEY (Phone_number)
+);
+
 
 CREATE TABLE Student (
 Student_Id VARCHAR(5) NOT NULL,
@@ -42,6 +33,21 @@ FOREIGN KEY (School_Id) REFERENCES School (School_Id),
 FOREIGN KEY (Phone_number) REFERENCES Parent (Phone_number)
 );
 
+CREATE TABLE Class (
+Class_Id VARCHAR(5) NOT NULL,
+Number_of_Students INT NULL,
+Assistant_Id VARCHAR(5) NULL,
+Student_Id VARCHAR(5) NULL,
+PRIMARY KEY (Class_Id),
+FOREIGN KEY (Assistant_Id) REFERENCES Assistant (Assistant_Id),
+FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id)
+);
+
+
+
+
+
+
 ALTER TABLE Class ADD FOREIGN KEY (Assistant_Id)REFERENCES Assistant (Assistant_Id);
 
 ALTER TABLE Class ADD FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id);
@@ -49,6 +55,7 @@ ALTER TABLE Class ADD FOREIGN KEY (Student_Id) REFERENCES Student (Student_Id);
 ALTER TABLE Student ADD FOREIGN KEY (School_Id) REFERENCES School (School_Id);
 
 ALTER TABLE Student ADD FOREIGN KEY (Phone_number) REFERENCES Parent (Phone_number);
+
 
 alter table class add column School_Id varchar (5);
 ALTER TABLE class ADD foreign key (School_Id) REFERENCES school (School_Id);
@@ -71,4 +78,241 @@ alter table student add foreign key (Assistant_Id) references assistant (Assista
 
 alter table student add column PhysicalHistory varchar (255);
 alter table student add column MentalHistory varchar (255);
+alter table student add column Advice varchar (255);
 
+
+INSERT INTO Student (Student_Id, First_Name, Last_Name)
+VALUES
+  ("16", 'Alex', 'Ng'),
+  ("17", 'Lisa', 'Wong'),
+  (18, 'Eric', 'Chang'),
+  (19, 'Karen', 'Yao'),
+  (20, 'Steven', 'Lin'),
+  (21, 'Grace', 'Chen'),
+  (22, 'Daniel', 'Park'),
+  (23, 'Jennifer', 'Kim'),
+  (24, 'Matthew', 'Tran'),
+  (25, 'Michelle', 'Nguyen'),
+  (26, 'Andrew', 'Nguyen'),
+  (27, 'Olivia', 'Lee'),
+  (28, 'Henry', 'Chu'),
+  (29, 'Samantha', 'Wu'),
+  (30, 'Ryan', 'Tan');
+
+
+
+INSERT INTO Parent (Student_Id, ParentName, Phone_number)
+VALUES
+  ("16", 'Sophia Chang', '12345678910'),
+  ("17", 'Ethan Koh','98745632100'),
+  (18, 'Megan Huang', '65478932107'),
+  (19, 'Bryan Chung','74125896307'),
+  (20, 'Amanda Liu', '03214785694'),
+  (21, 'Jason Tan', '96325874101'),
+  (22, 'Catherine Wang', '78912365409'),
+  (23, 'Mark Chen', '74103699885'),
+  (24, 'Alice Lin', '3021657894'),
+  (25, 'Brandon Kwok' ,'95135746201'),
+  (26, 'Jasmine Wang','753015984'),
+  (27, 'Kevin Nguyen','741963857'),
+  (28, 'Hannah Kim', '963741258'),
+  (29, 'Justin Wong', '6547890123'),
+  (30, 'Sandy Ng','498712546');
+  
+   INSERT INTO school (School_Id, School_name, school_address)
+VALUES
+  ('S001', 'ABC School', '123 Main St, Anytown, USA'),
+  ('S002', 'XYZ School', '456 High St, Anytown, USA');
+  
+  
+  INSERT INTO class (Class_Id, Number_of_Students, School_Id) VALUES
+('C001', 20, 'S001'),
+('C002', 25, 'S001'),
+('C003', 18, 'S002'),
+('C004', 22, 'S001'),
+('C005', 15, 'S002'),
+('C006', 30, 'S001'),
+('C007', 17, 'S002'),
+('C008', 21, 'S001'),
+('C009', 19, 'S002'),
+('C010', 24, 'S001'),
+('C011', 28, 'S002'),
+('C012', 16, 'S001'),
+('C013', 23, 'S002'),
+('C014', 27, 'S001'),
+('C015', 14, 'S002');
+
+INSERT INTO Assistant (Assistant_Id, First_name, Last_name, Age, School_Id, Class_Id) VALUES
+('A001', 'John', 'Doe', 28, 'S001', 'C001'),
+('A002', 'Jane', 'Smith', 32, 'S001', 'C002'),
+('A003', 'David', 'Johnson', 24, 'S002', 'C003'),
+('A004', 'Sarah', 'Williams', 26, 'S001', 'C004'),
+('A005', 'Robert', 'Brown', 29, 'S002', 'C005'),
+('A006', 'Lisa', 'Garcia', 31, 'S001', 'C006'),
+('A007', 'Michael', 'Davis', 27, 'S002', 'C007'),
+('A008', 'Emily', 'Rodriguez', 25, 'S001', 'C008'),
+('A009', 'Daniel', 'Martinez', 30, 'S002', 'C009'),
+('A010', 'Ashley', 'Hernandez', 28, 'S001', 'C010'),
+('A011', 'Christopher', 'Lopez', 33, 'S002', 'C011'),
+('A012', 'Amanda', 'Gonzalez', 29, 'S001', 'C012'),
+('A013', 'Matthew', 'Perez', 26, 'S002', 'C013'),
+('A014', 'Stephanie', 'Taylor', 31, 'S001', 'C014'),
+('A015', 'Brandon', 'Anderson', 27, 'S002', 'C015');
+  
+  
+  insert into Class (Assistant_Id) values ('A001');
+  
+  UPDATE Class SET Assistant_Id = 
+  CASE Class_Id
+    WHEN 'C001' THEN 'A001'
+    WHEN 'C002' THEN 'A002'
+    WHEN 'C003' THEN 'A003'
+    WHEN 'C004' THEN 'A004'
+    WHEN 'C005' THEN 'A005'
+    WHEN 'C006' THEN 'A006'
+    WHEN 'C007' THEN 'A007'
+    WHEN 'C008' THEN 'A008'
+    WHEN 'C009' THEN 'A009'
+    WHEN 'C010' THEN 'A010'
+    WHEN 'C011' THEN 'A011'
+    WHEN 'C012' THEN 'A012'
+    WHEN 'C013' THEN 'A013'
+    WHEN 'C014' THEN 'A014'
+    WHEN 'C015' THEN 'A015'
+  END;
+  
+  
+  
+
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '12345678910', Class_Id = 'C001', Assistant_Id = 'A001'
+WHERE Student_Id = "16";
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '98745632100', Class_Id = 'C002', Assistant_Id = 'A002'
+WHERE Student_Id = "17";
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '65478932107', Class_Id = 'C003', Assistant_Id = 'A003'
+WHERE Student_Id = 18;
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '74125896307', Class_Id = 'C004', Assistant_Id = 'A004'
+WHERE Student_Id = 19;
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '03214785694', Class_Id = 'C005', Assistant_Id = 'A005'
+WHERE Student_Id = 20;
+update student
+SET School_Id = 'S001', Phone_number = '96325874101', Class_Id = 'C006', Assistant_Id = 'A006' 
+WHERE Student_Id = 21;
+update student
+SET School_Id = 'S002', Phone_number = '78912365409', Class_Id = 'C007', Assistant_Id = 'A007'
+WHERE Student_Id = 22;
+
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '74103699885', Class_Id = 'C008', Assistant_Id = 'A008'
+WHERE Student_Id = 23;
+
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '3021657894', Class_Id = 'C009', Assistant_Id = 'A009'
+WHERE Student_Id = 24;
+
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '95135746201', Class_Id = 'C010', Assistant_Id = 'A010'
+WHERE Student_Id = 25;
+
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '753015984', Class_Id = 'C011', Assistant_Id = 'A011'
+WHERE Student_Id = 26;
+
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '741963857', Class_Id = 'C012', Assistant_Id = 'A012'
+WHERE Student_Id = 27;
+
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '963741258', Class_Id = 'C013', Assistant_Id = 'A013'
+WHERE Student_Id = 28;
+
+UPDATE Student 
+SET School_Id = 'S001', Phone_number = '6547890123', Class_Id = 'C014', Assistant_Id = 'A014'
+WHERE Student_Id = 29;
+
+UPDATE Student 
+SET School_Id = 'S002', Phone_number = '498712546', Class_Id = 'C015', Assistant_Id = 'A015'
+WHERE Student_Id = 30;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Allergic to peanuts.', MentalHistory = 'None.', Advice = 'Avoid eating peanuts.'
+WHERE Student_Id = 16;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Asthmatic.', MentalHistory = 'Has ADHD.', Advice = 'Take medication as prescribed.'
+WHERE Student_Id = 17;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a heart condition.', MentalHistory = 'Struggles with anxiety.', Advice = 'Take deep breaths when feeling anxious.'
+WHERE Student_Id = 18;
+
+-- Query 4
+UPDATE Student 
+SET PhysicalHistory = 'Suffers from migraines.', MentalHistory = 'Has depression.', Advice = 'Avoid triggers for migraines.'
+WHERE Student_Id = 19;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a history of joint pain.', MentalHistory = 'Has PTSD.', Advice = 'Practice relaxation techniques.'
+WHERE Student_Id = 20;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Allergic to shellfish.', MentalHistory = 'None.', Advice = 'Avoid eating shellfish.'
+WHERE Student_Id = 21;
+
+UPDATE Student 
+SET PhysicalHistory ='Has a history of asthma.', MentalHistory = 'Has anxiety.', Advice = 'Take medication as prescribed.'
+WHERE Student_Id = 22;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a heart murmur.', MentalHistory = 'Struggles with depression.', Advice = 'Get regular exercise.'
+WHERE Student_Id= 23;
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a history of migraines.', MentalHistory = 'Has PTSD.', Advice = 'Avoid triggers for migraines.'
+WHERE Student_Id = 24;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Allergic to dairy products.', MentalHistory = 'Has ADHD.', Advice = 'Avoid eating dairy products.'
+WHERE Student_Id = 25;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a history of arthritis.', MentalHistory = 'None.', Advice = 'Get regular exercise.'
+WHERE Student_Id = 26;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a heart condition.', MentalHistory = 'Struggles with anxiety.', Advice = 'Take deep breaths when feeling anxious.'
+WHERE Student_Id = 27;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Suffers from chronic back pain.', MentalHistory = 'Has depression.', Advice = 'Practice good posture.'
+WHERE Student_Id = 28;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a history of allergies.', MentalHistory = 'Has ADHD.', Advice = 'Avoid allergens.'
+WHERE Student_Id = 29;
+
+
+UPDATE Student 
+SET PhysicalHistory = 'Has a history of migraines.', MentalHistory = 'Has PTSD.', Advice = 'Practice relaxation techniques.'
+WHERE Student_Id = 30;
+
+select * from student;
+select * from assistant;
+select * from class;
+select * from parent;
+select * from school;
