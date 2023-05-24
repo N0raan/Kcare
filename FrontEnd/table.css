@@ -47,3 +47,31 @@ header {
     margin-top: 20px;
    
    }
+
+   .nav_search-btn {
+    background-image: url(images/search-icon.png);
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    padding-left: 5px;
+    border: none;
+    border-radius: 0;
+  }
+
+  .search {
+
+    font-family:"poppins",sans-serif;
+    color: #000;
+    background-color: #fff;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    box-sizing: border-box;
+    display: inline-block;
+  }
+  
+ 
